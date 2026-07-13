@@ -1,0 +1,181 @@
+:root {
+  --esteem-cta-lime: #c8ff3d;
+  --esteem-cta-duration: 300ms;
+  --esteem-cta-ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+/* Shared non-layout-changing hover layer for the site's primary CTA variants. */
+:where(
+  a.framer-WMYoJ.framer-v-j15i3q,
+  a.framer-WMYoJ.framer-v-11jj171,
+  .solar-lead-submit,
+  form[data-framer-name="Contact Form"] button[type="submit"]
+) {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: color var(--esteem-cta-duration) ease,
+    border-color var(--esteem-cta-duration) ease !important;
+}
+
+:where(
+  a.framer-WMYoJ.framer-v-j15i3q,
+  a.framer-WMYoJ.framer-v-11jj171,
+  .solar-lead-submit,
+  form[data-framer-name="Contact Form"] button[type="submit"]
+)::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--esteem-cta-lime);
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform var(--esteem-cta-duration) var(--esteem-cta-ease);
+}
+
+a.framer-WMYoJ.framer-v-11jj171::before {
+  background: rgba(226, 250, 90, .62);
+}
+
+:where(
+  a.framer-WMYoJ.framer-v-j15i3q,
+  a.framer-WMYoJ.framer-v-11jj171,
+  .solar-lead-submit,
+  form[data-framer-name="Contact Form"] button[type="submit"]
+) > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :where(
+    a.framer-WMYoJ.framer-v-j15i3q,
+    a.framer-WMYoJ.framer-v-11jj171,
+    .solar-lead-submit,
+    form[data-framer-name="Contact Form"] button[type="submit"]
+  ):hover::before {
+    transform: scaleX(1);
+  }
+
+  a.framer-WMYoJ.framer-v-j15i3q:hover,
+  .solar-lead-submit:hover,
+  form[data-framer-name="Contact Form"] button[type="submit"]:hover {
+    color: #111 !important;
+  }
+
+  a.framer-WMYoJ.framer-v-j15i3q:hover p,
+  .solar-lead-submit:hover .solar-lead-submit-label,
+  form[data-framer-name="Contact Form"] button[type="submit"]:hover p {
+    color: #111 !important;
+  }
+}
+
+:where(
+  a.framer-WMYoJ.framer-v-j15i3q,
+  a.framer-WMYoJ.framer-v-11jj171,
+  .solar-lead-submit,
+  form[data-framer-name="Contact Form"] button[type="submit"]
+):focus-visible::before {
+  transform: scaleX(1);
+}
+
+a.framer-WMYoJ.framer-v-j15i3q:focus-visible,
+.solar-lead-submit:focus-visible,
+form[data-framer-name="Contact Form"] button[type="submit"]:focus-visible {
+  color: #111 !important;
+}
+
+a.framer-WMYoJ.framer-v-j15i3q:focus-visible p,
+.solar-lead-submit:focus-visible .solar-lead-submit-label,
+form[data-framer-name="Contact Form"] button[type="submit"]:focus-visible p {
+  color: #111 !important;
+}
+
+:where(a.framer-WMYoJ.framer-v-j15i3q, a.framer-WMYoJ.framer-v-11jj171) .framer-11rp8ru {
+  transition: transform var(--esteem-cta-duration) var(--esteem-cta-ease),
+    background-color var(--esteem-cta-duration) ease !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :where(a.framer-WMYoJ.framer-v-j15i3q, a.framer-WMYoJ.framer-v-11jj171):hover .framer-11rp8ru {
+    transform: translateX(2px) !important;
+  }
+
+  a.framer-WMYoJ.framer-v-j15i3q:hover .framer-11rp8ru {
+    background-color: rgba(17, 17, 17, .08) !important;
+  }
+}
+
+:where(a.framer-WMYoJ.framer-v-j15i3q, a.framer-WMYoJ.framer-v-11jj171):focus-visible .framer-11rp8ru {
+  transform: translateX(2px) !important;
+}
+
+a.framer-WMYoJ.framer-v-j15i3q:focus-visible .framer-11rp8ru {
+  background-color: rgba(17, 17, 17, .08) !important;
+}
+
+.solar-lead-submit::after,
+form[data-framer-name="Contact Form"] button[type="submit"]::after {
+  content: "→";
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: 16px;
+  color: currentColor;
+  font: 500 17px/1 "Geist", "Geist Placeholder", sans-serif;
+  pointer-events: none;
+  transform: translate(-2px, -50%);
+  transition: transform var(--esteem-cta-duration) var(--esteem-cta-ease),
+    opacity 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .solar-lead-submit:hover::after,
+  form[data-framer-name="Contact Form"] button[type="submit"]:hover::after {
+    transform: translate(1px, -50%);
+  }
+}
+
+.solar-lead-submit:focus-visible::after,
+form[data-framer-name="Contact Form"] button[type="submit"]:focus-visible::after {
+  transform: translate(1px, -50%);
+}
+
+.solar-lead-submit.is-loading::after,
+.solar-lead-submit:disabled::after,
+form[data-framer-name="Contact Form"] button[type="submit"]:disabled::after {
+  opacity: 0;
+}
+
+:where(
+  a.framer-WMYoJ.framer-v-j15i3q,
+  a.framer-WMYoJ.framer-v-11jj171,
+  .solar-lead-submit,
+  form[data-framer-name="Contact Form"] button[type="submit"]
+):focus-visible {
+  outline: 3px solid var(--esteem-cta-lime) !important;
+  outline-offset: 3px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(
+    a.framer-WMYoJ.framer-v-j15i3q,
+    a.framer-WMYoJ.framer-v-11jj171,
+    .solar-lead-submit,
+    form[data-framer-name="Contact Form"] button[type="submit"]
+  ),
+  :where(
+    a.framer-WMYoJ.framer-v-j15i3q,
+    a.framer-WMYoJ.framer-v-11jj171,
+    .solar-lead-submit,
+    form[data-framer-name="Contact Form"] button[type="submit"]
+  )::before,
+  :where(a.framer-WMYoJ.framer-v-j15i3q, a.framer-WMYoJ.framer-v-11jj171) .framer-11rp8ru,
+  .solar-lead-submit::after,
+  form[data-framer-name="Contact Form"] button[type="submit"]::after {
+    transition: none !important;
+  }
+}

@@ -1,5 +1,7 @@
 (() => {
   const heroCtaSelector = '#hero a[name="Primary Button"]';
+  const scriptUrl = document.currentScript?.src || window.location.href;
+  const illustrationUrl = new URL("./assests/wind-power.png", scriptUrl).href;
   const focusableSelector = 'button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [href], [tabindex]:not([tabindex="-1"])';
   let trigger = null;
   let isSubmitting = false;
@@ -27,7 +29,7 @@
               <li><span class="solar-lead-check">${checkIcon}</span>No-obligation consultation</li>
               <li><span class="solar-lead-check">${checkIcon}</span>Designed for your property</li>
             </ul>
-            <img class="solar-lead-art" src="./assests/wind-power.png" alt="Wind and solar renewable energy illustration">
+            <img class="solar-lead-art" src="${illustrationUrl}" alt="Wind and solar renewable energy illustration">
           </div>
           <div class="solar-lead-form-panel">
             <div class="solar-lead-form-wrap">
@@ -295,11 +297,13 @@
   prepareHeroCtas();
   document.addEventListener("framer:pageview", prepareHeroCtas);
 
+  const quoteTriggerSelector = `${heroCtaSelector}, [data-open-quote-modal]`;
+
   document.addEventListener("click", (event) => {
-    const cta = event.target.closest(heroCtaSelector);
+    const cta = event.target.closest(quoteTriggerSelector);
     if (!cta) return;
     event.preventDefault();
-    event.stopImmediatePropagation();
+    if (cta.matches(heroCtaSelector)) event.stopImmediatePropagation();
     openModal(cta);
   }, true);
 

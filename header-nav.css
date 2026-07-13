@@ -1,16 +1,19 @@
 .solaris-site-header {
   --header-ink: #111111;
+  --header-lime: #c8ff3d;
   position: fixed;
   inset: 0 0 auto;
-  z-index: 1000;
-  padding: 12px clamp(18px, 3vw, 42px);
+  z-index: 2000;
+  padding: max(12px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) 12px max(18px, env(safe-area-inset-left));
   pointer-events: none;
 }
 
 .solaris-header-inner {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(190px, 1fr) auto minmax(190px, 1fr);
+  grid-template-columns: minmax(164px, 1fr) auto minmax(164px, 1fr);
   align-items: center;
+  gap: 14px;
   width: min(100%, 1440px);
   margin: 0 auto;
 }
@@ -21,20 +24,15 @@
 .solaris-menu-toggle,
 .solaris-mobile-menu { pointer-events: auto; }
 
-.solaris-brand { justify-self: start; min-width: 0; }
+.solaris-brand { min-width: 0; justify-self: start; }
 .solaris-header-cta { justify-self: end; }
-
-.solaris-brand .framer-yi202p-container,
-.solaris-header-cta .framer-mt5eyy-container {
-  display: flex;
-  width: max-content;
-}
+.solaris-brand .framer-yi202p-container { display: flex; width: max-content; }
 
 .solaris-nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 1px;
   padding: 5px;
   border: 1px solid transparent;
   border-radius: 999px;
@@ -45,7 +43,7 @@
 }
 
 .solaris-site-header.is-scrolled .solaris-nav {
-  background: rgba(250, 249, 244, .78);
+  background: rgba(250, 249, 244, .8);
   border-color: rgba(17, 17, 17, .09);
   box-shadow: 0 8px 30px rgba(17, 17, 17, .07);
   -webkit-backdrop-filter: blur(18px) saturate(145%);
@@ -59,7 +57,7 @@
   border: 0;
   background: transparent;
   color: var(--header-ink);
-  font-family: "Instrument Sans", "Host Grotesk", Arial, sans-serif;
+  font-family: "Geist", "Geist Placeholder", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 1;
@@ -70,36 +68,87 @@
 .solaris-nav-item {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 10px 11px;
+  gap: 4px;
+  padding: 10px 9px;
   border-radius: 999px;
   transition: background-color .2s ease, color .2s ease, transform .2s ease;
 }
 
 .solaris-nav-item:hover,
 .solaris-nav-item:focus-visible {
-  background: rgba(255, 255, 255, .62);
+  background: rgba(255, 255, 255, .66);
   outline: none;
   transform: translateY(-1px);
 }
 
-.solaris-chevron {
-  width: 12px;
-  height: 12px;
-  transition: transform .2s ease;
+.solaris-chevron { width: 11px; height: 11px; transition: transform .2s ease; }
+.solaris-nav-item:hover .solaris-chevron { transform: translateY(1px); }
+
+.solaris-quote-cta {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 48px;
+  padding: 5px 6px 5px 20px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 15px;
+  background: #111;
+  color: #fff;
+  font-family: "Geist", "Geist Placeholder", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(17, 17, 17, .14);
 }
 
-.solaris-nav-item:hover .solaris-chevron { transform: translateY(1px); }
+.solaris-quote-fill {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--header-lime);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1);
+}
+
+.solaris-quote-label { position: relative; transition: color .25s ease; }
+.solaris-quote-arrow {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 11px;
+  background: var(--header-lime);
+  color: #111;
+  transition: transform .25s ease, background-color .25s ease;
+}
+.solaris-quote-arrow svg { width: 18px; height: 18px; }
+.solaris-quote-cta:hover .solaris-quote-fill,
+.solaris-quote-cta:focus-visible .solaris-quote-fill { transform: scaleX(1); }
+.solaris-quote-cta:hover .solaris-quote-label,
+.solaris-quote-cta:focus-visible .solaris-quote-label { color: #111; }
+.solaris-quote-cta:hover .solaris-quote-arrow,
+.solaris-quote-cta:focus-visible .solaris-quote-arrow { transform: translateX(2px); background: rgba(17,17,17,.08); }
+.solaris-quote-cta:focus-visible,
+.solaris-menu-toggle:focus-visible { outline: 2px solid #111; outline-offset: 3px; }
 
 .solaris-menu-toggle {
   display: none;
   position: relative;
-  width: 42px;
-  height: 42px;
+  width: 46px;
+  height: 46px;
   padding: 0;
   border: 1px solid rgba(17, 17, 17, .1);
   border-radius: 14px;
-  background: rgba(250, 249, 244, .7);
+  background: rgba(250, 249, 244, .78);
   box-shadow: 0 6px 22px rgba(17, 17, 17, .06);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
@@ -108,56 +157,48 @@
 
 .solaris-menu-toggle span {
   position: absolute;
-  left: 12px;
+  left: 14px;
   width: 16px;
   height: 1.5px;
   border-radius: 2px;
   background: var(--header-ink);
   transition: transform .25s ease, top .25s ease;
 }
-
-.solaris-menu-toggle span:first-child { top: 16px; }
-.solaris-menu-toggle span:last-child { top: 24px; }
-.solaris-menu-toggle[aria-expanded="true"] span:first-child { top: 20px; transform: rotate(45deg); }
-.solaris-menu-toggle[aria-expanded="true"] span:last-child { top: 20px; transform: rotate(-45deg); }
+.solaris-menu-toggle span:first-child { top: 17px; }
+.solaris-menu-toggle span:last-child { top: 26px; }
+.solaris-menu-toggle[aria-expanded="true"] span:first-child { top: 22px; transform: rotate(45deg); }
+.solaris-menu-toggle[aria-expanded="true"] span:last-child { top: 22px; transform: rotate(-45deg); }
 .solaris-mobile-menu { display: none; }
 
 body.header-upgraded .framer-efto20-container { display: none !important; }
 
-@media (max-width: 1120px) {
-  .solaris-header-inner {
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-    gap: 12px;
-  }
-
+@media (max-width: 1024px) {
+  html, body { max-width: 100%; overflow-x: clip; }
+  .solaris-header-inner { grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; }
   .solaris-nav { display: none; }
-  .solaris-menu-toggle { display: block; justify-self: center; }
+  .solaris-menu-toggle { display: block; justify-self: end; }
 
   .solaris-mobile-menu {
     position: absolute;
-    top: 70px;
-    left: 50%;
+    top: calc(100% + 12px);
+    right: 0;
     display: grid;
     width: min(calc(100vw - 32px), 440px);
     padding: 9px;
     border: 1px solid rgba(17, 17, 17, .09);
     border-radius: 22px;
-    background: rgba(250, 249, 244, .88);
+    background: rgba(250, 249, 244, .9);
     box-shadow: 0 18px 45px rgba(17, 17, 17, .12);
     -webkit-backdrop-filter: blur(22px) saturate(145%);
     backdrop-filter: blur(22px) saturate(145%);
     opacity: 0;
     visibility: hidden;
-    transform: translate(-50%, -10px) scale(.98);
+    transform: translateY(-10px) scale(.98);
+    transform-origin: top right;
     transition: opacity .24s ease, visibility .24s ease, transform .24s ease;
   }
 
-  .solaris-mobile-menu.is-open {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, 0) scale(1);
-  }
-
+  .solaris-mobile-menu.is-open { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
   .solaris-mobile-nav-item {
     display: flex;
     align-items: center;
@@ -168,47 +209,35 @@ body.header-upgraded .framer-efto20-container { display: none !important; }
     text-align: left;
     transition: background-color .18s ease;
   }
-
   .solaris-mobile-nav-item:hover,
-  .solaris-mobile-nav-item:focus-visible {
-    background: rgba(255, 255, 255, .72);
-    outline: none;
-  }
+  .solaris-mobile-nav-item:focus-visible { background: rgba(255,255,255,.72); outline: none; }
+  .solaris-mobile-quote { width: 100%; margin-top: 7px; }
 }
 
-@media (max-width: 620px) {
-  html, body { overflow-x: clip; }
-  .solaris-site-header { padding: 10px 12px; }
-  .solaris-header-inner { gap: 6px; }
-
-  .solaris-brand {
-    width: 132px;
-    height: 48px;
-    overflow: hidden;
+@media (max-width: 767px) {
+  .solaris-site-header {
+    padding: max(10px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) 10px max(14px, env(safe-area-inset-left));
   }
-
-  .solaris-brand .framer-yi202p-container {
-    transform: scale(.68);
-    transform-origin: left center;
-  }
-
-  .solaris-header-cta .framer-mt5eyy-container > a { min-height: 40px !important; }
-  .solaris-header-cta .framer-mt5eyy-container > a > div:first-child { padding: 9px 11px !important; }
-  .solaris-header-cta p { font-size: 12px !important; }
-  .solaris-menu-toggle { width: 40px; height: 40px; border-radius: 13px; }
-  .solaris-mobile-menu { top: 64px; }
+  .solaris-header-inner { gap: 8px; }
+  .solaris-quote-cta { height: 44px; gap: 8px; padding: 4px 5px 4px 14px; font-size: 13px; border-radius: 14px; }
+  .solaris-quote-arrow { width: 34px; height: 34px; flex-basis: 34px; border-radius: 10px; }
+  .solaris-menu-toggle { width: 46px; height: 46px; }
+  .solaris-mobile-menu { width: min(calc(100vw - 28px), 440px); }
+  .solaris-mobile-quote { height: 46px; font-size: 14px; }
 }
 
-@media (max-width: 360px) {
-  .solaris-brand { width: 108px; }
-  .solaris-brand .framer-yi202p-container { transform: scale(.56); }
-  .solaris-header-cta .framer-mt5eyy-container > a > div:first-child { padding: 8px 9px !important; }
-  .solaris-header-cta p { font-size: 11px !important; }
+@media (max-width: 359px) {
+  .solaris-site-header {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+  .solaris-header-inner { gap: 7px; }
+  .solaris-header-cta > .solaris-quote-cta { width: 44px; padding: 4px; gap: 0; }
+  .solaris-header-cta > .solaris-quote-cta .solaris-quote-label { display: none; }
+  .solaris-mobile-quote .solaris-quote-label { display: inline; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .solaris-nav,
-  .solaris-nav-item,
-  .solaris-mobile-menu,
-  .solaris-menu-toggle span { transition: none; }
+  .solaris-nav, .solaris-nav-item, .solaris-mobile-menu, .solaris-menu-toggle span,
+  .solaris-quote-fill, .solaris-quote-arrow, .solaris-quote-label { transition: none; }
 }
