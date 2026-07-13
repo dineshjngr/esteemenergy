@@ -7,10 +7,30 @@
   --esteem-cta-ease: cubic-bezier(.2, .8, .2, 1);
 }
 
-/* About-page CTA design shared by the site's primary action variants. */
+/* 1. Framer container overrides to prevent min-content wrapping */
+.framer-WiXf4 .framer-1c985e4,
+.framer-UEkM5 .framer-woxfuq {
+  width: auto;
+  height: auto;
+}
+
+.framer-WiXf4 .framer-pvrod3.about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+  width: auto;
+  height: auto;
+  flex-flow: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* 2. Base shared styles for primary CTA variants */
 :where(
   a.framer-WMYoJ.framer-v-j15i3q,
   a.framer-WMYoJ.framer-v-11jj171,
+  .esteem-home-cta,
   .esteem-primary-cta,
   .esteem-secondary-cta,
   .solar-lead-submit,
@@ -21,65 +41,94 @@
   isolation: isolate;
   min-height: 52px;
   overflow: hidden;
-  border: 1px solid var(--esteem-cta-ink) !important;
-  border-radius: var(--esteem-cta-radius) !important;
-  font-family: "Geist", "Geist Placeholder", sans-serif !important;
-  font-size: 15px !important;
-  font-weight: 500 !important;
-  letter-spacing: -.01em !important;
-  line-height: 1 !important;
+  border: 1px solid var(--esteem-cta-ink);
+  border-radius: var(--esteem-cta-radius);
+  font-family: "Geist", "Geist Placeholder", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1;
   transition: color var(--esteem-cta-duration) ease,
     border-color var(--esteem-cta-duration) ease,
-    background-color var(--esteem-cta-duration) ease !important;
+    background-color var(--esteem-cta-duration) ease;
 }
 
+/* Specific styling for homepage and Framer CTAs (without !important, using specificity) */
+a.framer-WMYoJ.framer-v-j15i3q,
+a.framer-WMYoJ.framer-v-11jj171,
+.esteem-home-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: auto;
+  padding: 7px 7px 7px 20px;
+  background: var(--esteem-cta-ink);
+  color: #fff;
+  gap: 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Specific styling for lead form submit button */
 :where(
-  a.framer-WMYoJ.framer-v-j15i3q,
-  a.framer-WMYoJ.framer-v-11jj171,
   .solar-lead-submit,
   form[data-framer-name="Contact Form"] button[type="submit"]
 ) {
-  padding: 7px 7px 7px 20px !important;
-  background: var(--esteem-cta-ink) !important;
-  color: #fff !important;
+  padding: 7px 7px 7px 20px;
+  background: var(--esteem-cta-ink);
+  color: #fff;
 }
 
-:where(
-  a.framer-WMYoJ.framer-v-j15i3q,
-  a.framer-WMYoJ.framer-v-11jj171
-) {
-  gap: 16px !important;
-  justify-content: space-between !important;
-  text-decoration: none !important;
+/* First child label text color transition and layout */
+a.framer-WMYoJ.framer-v-j15i3q > span:first-child,
+a.framer-WMYoJ.framer-v-11jj171 > span:first-child,
+.esteem-home-cta > span:first-child {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  transition: color var(--esteem-cta-duration) ease;
 }
 
-:where(
-  a.framer-WMYoJ.framer-v-j15i3q,
-  a.framer-WMYoJ.framer-v-11jj171
-) p {
-  color: #fff !important;
-  font-weight: 500 !important;
+/* Prevent text wrapping on desktop/tablet */
+a.framer-WMYoJ.framer-v-j15i3q > span:first-child,
+a.framer-WMYoJ.framer-v-11jj171 > span:first-child,
+.esteem-home-cta > span:first-child,
+.esteem-primary-cta > span:first-child,
+.esteem-secondary-cta > span:first-child {
+  white-space: nowrap;
 }
 
-:where(
-  a.framer-WMYoJ.framer-v-j15i3q,
-  a.framer-WMYoJ.framer-v-11jj171
-) .framer-11rp8ru {
-  position: relative !important;
-  display: grid !important;
-  flex: 0 0 var(--esteem-cta-arrow-size) !important;
-  width: var(--esteem-cta-arrow-size) !important;
-  height: var(--esteem-cta-arrow-size) !important;
-  place-items: center !important;
-  overflow: hidden !important;
-  border-radius: 11px !important;
-  background: var(--esteem-cta-lime) !important;
-  color: var(--esteem-cta-ink) !important;
+/* 3. Custom arrow box element (centered using display: grid) */
+.esteem-cta-arrow {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  flex: 0 0 var(--esteem-cta-arrow-size);
+  width: var(--esteem-cta-arrow-size);
+  height: var(--esteem-cta-arrow-size);
+  place-items: center;
+  border-radius: 11px;
+  background: var(--esteem-cta-lime);
+  color: var(--esteem-cta-ink);
+  font-size: 18px;
+  line-height: 1;
+  transition: transform var(--esteem-cta-duration) var(--esteem-cta-ease),
+    background-color var(--esteem-cta-duration) ease;
 }
 
+.esteem-cta-arrow svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  color: var(--esteem-cta-ink);
+  transition: transform var(--esteem-cta-duration) var(--esteem-cta-ease);
+}
+
+/* 4. Hover & focus background transition (sliding lime fill) */
 :where(
   a.framer-WMYoJ.framer-v-j15i3q,
   a.framer-WMYoJ.framer-v-11jj171,
+  .esteem-home-cta,
   .esteem-primary-cta,
   .esteem-secondary-cta,
   .solar-lead-submit,
@@ -101,11 +150,14 @@ a.framer-WMYoJ.framer-v-11jj171::before {
   background: rgba(226, 250, 90, .62);
 }
 
-.esteem-secondary-cta::before { background: var(--esteem-cta-lime); }
+.esteem-secondary-cta::before {
+  background: var(--esteem-cta-lime);
+}
 
 :where(
   a.framer-WMYoJ.framer-v-j15i3q,
   a.framer-WMYoJ.framer-v-11jj171,
+  .esteem-home-cta,
   .esteem-primary-cta,
   .esteem-secondary-cta,
   .solar-lead-submit,
@@ -115,10 +167,12 @@ a.framer-WMYoJ.framer-v-11jj171::before {
   z-index: 1;
 }
 
+/* Hover behaviors */
 @media (hover: hover) and (pointer: fine) {
   :where(
     a.framer-WMYoJ.framer-v-j15i3q,
     a.framer-WMYoJ.framer-v-11jj171,
+    .esteem-home-cta,
     .esteem-primary-cta,
     .esteem-secondary-cta,
     .solar-lead-submit,
@@ -128,24 +182,35 @@ a.framer-WMYoJ.framer-v-11jj171::before {
   }
 
   a.framer-WMYoJ.framer-v-j15i3q:hover,
+  a.framer-WMYoJ.framer-v-11jj171:hover,
+  .esteem-home-cta:hover,
   .esteem-primary-cta:hover,
   .esteem-secondary-cta:hover,
   .solar-lead-submit:hover,
   form[data-framer-name="Contact Form"] button[type="submit"]:hover {
-    color: #111 !important;
+    color: var(--esteem-cta-ink);
   }
 
-  a.framer-WMYoJ.framer-v-j15i3q:hover p,
-  a.framer-WMYoJ.framer-v-11jj171:hover p,
-  .solar-lead-submit:hover .solar-lead-submit-label,
-  form[data-framer-name="Contact Form"] button[type="submit"]:hover p {
-    color: #111 !important;
+  a.framer-WMYoJ.framer-v-j15i3q:hover > span:first-child,
+  a.framer-WMYoJ.framer-v-11jj171:hover > span:first-child,
+  .esteem-home-cta:hover > span:first-child {
+    color: var(--esteem-cta-ink);
+  }
+
+  a.framer-WMYoJ.framer-v-j15i3q:hover .esteem-cta-arrow,
+  a.framer-WMYoJ.framer-v-11jj171:hover .esteem-cta-arrow,
+  .esteem-home-cta:hover .esteem-cta-arrow,
+  .esteem-primary-cta:hover .esteem-cta-arrow,
+  .esteem-secondary-cta:hover .esteem-cta-arrow {
+    transform: translateX(2px);
   }
 }
 
+/* Focus states */
 :where(
   a.framer-WMYoJ.framer-v-j15i3q,
   a.framer-WMYoJ.framer-v-11jj171,
+  .esteem-home-cta,
   .esteem-primary-cta,
   .esteem-secondary-cta,
   .solar-lead-submit,
@@ -155,101 +220,88 @@ a.framer-WMYoJ.framer-v-11jj171::before {
 }
 
 a.framer-WMYoJ.framer-v-j15i3q:focus-visible,
+a.framer-WMYoJ.framer-v-11jj171:focus-visible,
+.esteem-home-cta:focus-visible,
 .esteem-primary-cta:focus-visible,
 .esteem-secondary-cta:focus-visible,
 .solar-lead-submit:focus-visible,
 form[data-framer-name="Contact Form"] button[type="submit"]:focus-visible {
-  color: #111 !important;
+  color: var(--esteem-cta-ink);
+  outline: 3px solid var(--esteem-cta-lime);
+  outline-offset: 3px;
 }
 
-a.framer-WMYoJ.framer-v-j15i3q:focus-visible p,
-a.framer-WMYoJ.framer-v-11jj171:focus-visible p,
-.solar-lead-submit:focus-visible .solar-lead-submit-label,
-form[data-framer-name="Contact Form"] button[type="submit"]:focus-visible p {
-  color: #111 !important;
+a.framer-WMYoJ.framer-v-j15i3q:focus-visible > span:first-child,
+a.framer-WMYoJ.framer-v-11jj171:focus-visible > span:first-child,
+.esteem-home-cta:focus-visible > span:first-child {
+  color: var(--esteem-cta-ink);
 }
 
-:where(a.framer-WMYoJ.framer-v-j15i3q, a.framer-WMYoJ.framer-v-11jj171) .framer-11rp8ru {
-  transition: transform var(--esteem-cta-duration) var(--esteem-cta-ease),
-    background-color var(--esteem-cta-duration) ease !important;
+a.framer-WMYoJ.framer-v-j15i3q:focus-visible .esteem-cta-arrow,
+a.framer-WMYoJ.framer-v-11jj171:focus-visible .esteem-cta-arrow,
+.esteem-home-cta:focus-visible .esteem-cta-arrow,
+.esteem-primary-cta:focus-visible .esteem-cta-arrow,
+.esteem-secondary-cta:focus-visible .esteem-cta-arrow {
+  transform: translateX(2px);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  :where(a.framer-WMYoJ.framer-v-j15i3q, a.framer-WMYoJ.framer-v-11jj171):hover .framer-11rp8ru {
-    transform: translateX(2px) !important;
-  }
-
-  a.framer-WMYoJ.framer-v-j15i3q:hover .framer-11rp8ru {
-    background-color: rgba(17, 17, 17, .08) !important;
-  }
-}
-
-:where(a.framer-WMYoJ.framer-v-j15i3q, a.framer-WMYoJ.framer-v-11jj171):focus-visible .framer-11rp8ru {
-  transform: translateX(2px) !important;
-}
-
-a.framer-WMYoJ.framer-v-j15i3q:focus-visible .framer-11rp8ru {
-  background-color: rgba(17, 17, 17, .08) !important;
-}
-
-/* The longer footer copy needs stable dimensions instead of Framer's intrinsic short-label sizing. */
+/* 5. Clean footer quote block styling overrides */
 footer .esteem-footer-quote-wrap {
-  width: min(240px, 100%) !important;
-  max-width: 100% !important;
+  width: min(240px, 100%);
+  max-width: 100%;
 }
 
 footer .esteem-footer-quote-cta {
-  justify-content: space-between !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  min-height: 48px !important;
-  padding: 6px 6px 6px 18px !important;
-  gap: 12px !important;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 100%;
+  min-height: 48px;
+  padding: 6px 6px 6px 18px;
+  gap: 12px;
 }
 
 footer .esteem-footer-quote-cta .framer-13xk4pa,
 footer .esteem-footer-quote-cta .framer-13xk4pa p {
-  width: auto !important;
-  max-width: 100% !important;
-  white-space: nowrap !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  line-height: 1 !important;
+  width: auto;
+  max-width: 100%;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
 }
 
 footer .esteem-footer-quote-cta .framer-11rp8ru {
-  flex: 0 0 36px !important;
-  width: 36px !important;
-  height: 36px !important;
-  aspect-ratio: 1 !important;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  aspect-ratio: 1;
 }
 
 footer .esteem-footer-quote-cta .framer-j6tph6 {
-  right: 8px !important;
-  bottom: 8px !important;
-  transform: translateX(0) !important;
-  transition: transform var(--esteem-cta-duration) var(--esteem-cta-ease) !important;
+  right: 8px;
+  bottom: 8px;
+  transform: translateX(0);
+  transition: transform var(--esteem-cta-duration) var(--esteem-cta-ease);
 }
 
 footer .esteem-footer-quote-cta .framer-vlv1kw {
-  display: none !important;
+  display: none;
 }
 
 @media (max-width: 360px) {
   footer .esteem-footer-quote-wrap {
-    width: 100% !important;
+    width: 100%;
   }
-
   footer .esteem-footer-quote-cta {
-    padding-left: 15px !important;
+    padding-left: 15px;
   }
-
   footer .esteem-footer-quote-cta .framer-13xk4pa,
   footer .esteem-footer-quote-cta .framer-13xk4pa p {
-    font-size: 13px !important;
+    font-size: 13px;
   }
 }
 
+/* 6. Lead Form Submit overrides */
 .solar-lead-submit::after,
 form[data-framer-name="Contact Form"] button[type="submit"]::after {
   content: "→";
@@ -266,7 +318,7 @@ form[data-framer-name="Contact Form"] button[type="submit"]::after {
   color: var(--esteem-cta-ink);
   font: 500 17px/1 "Geist", "Geist Placeholder", sans-serif;
   pointer-events: none;
-  transform: translate(-2px, -50%);
+  transform: translateY(-50%);
   transition: transform var(--esteem-cta-duration) var(--esteem-cta-ease),
     background-color var(--esteem-cta-duration) ease,
     opacity 180ms ease;
@@ -274,29 +326,34 @@ form[data-framer-name="Contact Form"] button[type="submit"]::after {
 
 .solar-lead-submit,
 form[data-framer-name="Contact Form"] button[type="submit"] {
-  padding-right: 54px !important;
-  text-align: left !important;
-  transform: none !important;
+  padding-right: 54px;
+  text-align: left;
+  transform: none;
+}
+
+.solar-lead-submit-label,
+form[data-framer-name="Contact Form"] button[type="submit"] p {
+  margin-right: auto;
 }
 
 .solar-lead-submit:hover,
 .solar-lead-submit:focus-visible,
 form[data-framer-name="Contact Form"] button[type="submit"]:hover,
 form[data-framer-name="Contact Form"] button[type="submit"]:focus-visible {
-  background: var(--esteem-cta-ink) !important;
-  transform: none !important;
+  background: var(--esteem-cta-ink);
+  transform: none;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .solar-lead-submit:hover::after,
   form[data-framer-name="Contact Form"] button[type="submit"]:hover::after {
-    transform: translate(1px, -50%);
+    transform: translateX(3px) translateY(-50%);
   }
 }
 
 .solar-lead-submit:focus-visible::after,
 form[data-framer-name="Contact Form"] button[type="submit"]:focus-visible::after {
-  transform: translate(1px, -50%);
+  transform: translateX(3px) translateY(-50%);
 }
 
 .solar-lead-submit.is-loading::after,
@@ -305,22 +362,76 @@ form[data-framer-name="Contact Form"] button[type="submit"]:disabled::after {
   opacity: 0;
 }
 
-:where(
-  a.framer-WMYoJ.framer-v-j15i3q,
-  a.framer-WMYoJ.framer-v-11jj171,
+/* 7. About page & Hero action layout styles (specifically designed to not conflict with original page designs) */
+.esteem-primary-cta,
+.esteem-secondary-cta {
+  box-sizing: border-box;
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  min-height: 52px;
+  width: auto;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 7px 7px 7px 20px;
+  overflow: hidden;
+  border: 1px solid var(--esteem-cta-ink);
+  border-radius: 16px;
+  color: #fff;
+  font-family: "Geist", "Geist Placeholder", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--esteem-cta-duration) ease,
+    background-color var(--esteem-cta-duration) ease,
+    border-color var(--esteem-cta-duration) ease;
+}
+
+.esteem-primary-cta {
+  background: var(--esteem-cta-ink);
+}
+
+.esteem-secondary-cta {
+  background: rgba(255, 255, 255, 0.62);
+  color: var(--esteem-cta-ink);
+}
+
+.esteem-secondary-cta .esteem-cta-arrow {
+  background: var(--esteem-cta-ink);
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .framer-WiXf4 .framer-pvrod3.about-actions {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
   .esteem-primary-cta,
-  .esteem-secondary-cta,
-  .solar-lead-submit,
-  form[data-framer-name="Contact Form"] button[type="submit"]
-):focus-visible {
-  outline: 3px solid var(--esteem-cta-lime) !important;
-  outline-offset: 3px !important;
+  .esteem-secondary-cta {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* Extremely narrow viewport font wrapping fallback */
+@media (max-width: 350px) {
+  a.framer-WMYoJ.framer-v-j15i3q > span:first-child,
+  a.framer-WMYoJ.framer-v-11jj171 > span:first-child,
+  .esteem-home-cta > span:first-child {
+    white-space: normal;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   :where(
     a.framer-WMYoJ.framer-v-j15i3q,
     a.framer-WMYoJ.framer-v-11jj171,
+    .esteem-home-cta,
     .esteem-primary-cta,
     .esteem-secondary-cta,
     .solar-lead-submit,
@@ -329,14 +440,13 @@ form[data-framer-name="Contact Form"] button[type="submit"]:disabled::after {
   :where(
     a.framer-WMYoJ.framer-v-j15i3q,
     a.framer-WMYoJ.framer-v-11jj171,
+    .esteem-home-cta,
     .esteem-primary-cta,
     .esteem-secondary-cta,
     .solar-lead-submit,
     form[data-framer-name="Contact Form"] button[type="submit"]
   )::before,
-  :where(a.framer-WMYoJ.framer-v-j15i3q, a.framer-WMYoJ.framer-v-11jj171) .framer-11rp8ru,
-  .solar-lead-submit::after,
-  form[data-framer-name="Contact Form"] button[type="submit"]::after {
+  .esteem-cta-arrow {
     transition: none !important;
   }
 }
