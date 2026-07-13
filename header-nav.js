@@ -7,6 +7,8 @@
   const menuRoutes = Object.freeze({
     About: "/about",
     Pricing: "/pricing",
+    Blogs: "/blogs",
+    Contact: "/contact",
   });
 
   const chevron = `

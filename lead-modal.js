@@ -270,16 +270,44 @@
     submitError.classList.remove("is-visible");
 
     try {
-      await submitThroughLegacyForm();
-      hasSubmitted = true;
-      showSuccess();
+      const values = new FormData(form);
+      const payload = {
+        fullName: values.get("Name")?.trim() || "",
+        phone: values.get("Phone")?.trim() || "",
+        email: values.get("Email")?.trim() || "",
+        propertyAddress: values.get("Address")?.trim() || "",
+        propertyType: values.get("Location")?.trim() || "",
+        monthlyBill: values.get("Electricity Bill")?.trim() || "",
+        message: values.get("Message")?.trim() || ""
+      };
+
+      const response = await fetch("https://script.google.com/macros/s/AKfycbyZbIKxHCP36DY_iWxr7bb-iJbg5P163uVV9QknctcyC0Y1g4fibORX9RDR4QSWEsM/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send request. Please check your internet connection.");
+      }
+
+      const result = await response.json();
+      if (result && result.success === true) {
+        hasSubmitted = true;
+        form.reset();
+        showSuccess();
+      } else {
+        throw new Error((result && result.message) || "Submission failed. Please try again.");
+      }
     } catch (error) {
       submitError.textContent = error.message || "Something went wrong. Please try again.";
       submitError.classList.add("is-visible");
+    } finally {
       submitButton.disabled = false;
       submitButton.classList.remove("is-loading");
       submitLabel.textContent = "GET MY FREE SOLAR ASSESSMENT";
-    } finally {
       isSubmitting = false;
     }
   });
