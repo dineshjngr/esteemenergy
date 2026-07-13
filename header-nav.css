@@ -63,6 +63,7 @@
   line-height: 1;
   white-space: nowrap;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .solaris-nav-item {
@@ -75,7 +76,8 @@
 }
 
 .solaris-nav-item:hover,
-.solaris-nav-item:focus-visible {
+.solaris-nav-item:focus-visible,
+.solaris-nav-item.is-active {
   background: rgba(255, 255, 255, .66);
   outline: none;
   transform: translateY(-1px);
@@ -172,6 +174,23 @@
 
 body.header-upgraded .framer-efto20-container { display: none !important; }
 
+footer .esteem-footer-pricing-link {
+  display: block;
+  color: inherit;
+  font-family: "Geist", "Geist Placeholder", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+  text-decoration: none;
+}
+
+footer .esteem-footer-pricing-link:hover,
+footer .esteem-footer-pricing-link[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-color: #78a800;
+  text-underline-offset: 5px;
+}
+
 @media (max-width: 1024px) {
   html, body { max-width: 100%; overflow-x: clip; }
   .solaris-header-inner { grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; }
@@ -210,7 +229,8 @@ body.header-upgraded .framer-efto20-container { display: none !important; }
     transition: background-color .18s ease;
   }
   .solaris-mobile-nav-item:hover,
-  .solaris-mobile-nav-item:focus-visible { background: rgba(255,255,255,.72); outline: none; }
+  .solaris-mobile-nav-item:focus-visible,
+  .solaris-mobile-nav-item.is-active { background: rgba(200,255,61,.3); outline: none; }
   .solaris-mobile-quote { width: 100%; margin-top: 7px; }
 }
 

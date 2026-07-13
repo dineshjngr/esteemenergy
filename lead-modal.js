@@ -1,4 +1,5 @@
 (() => {
+  if (new URLSearchParams(window.location.search).has("lead-bridge")) return;
   const heroCtaSelector = '#hero a[name="Primary Button"]';
   const scriptUrl = document.currentScript?.src || window.location.href;
   const illustrationUrl = new URL("./assests/wind-power.png", scriptUrl).href;
@@ -91,7 +92,7 @@
 
   const iframe = document.createElement("iframe");
   iframe.className = "solar-legacy-form-bridge";
-  iframe.src = "./contact/";
+  iframe.src = "/contact/?lead-bridge=1";
   iframe.title = "Solar consultation submission service";
   iframe.tabIndex = -1;
   iframe.setAttribute("aria-hidden", "true");
@@ -112,6 +113,7 @@
   const openModal = (cta) => {
     if (overlay.classList.contains("is-open")) return;
     trigger = cta;
+    form.dataset.selectedPackage = cta.dataset.solarPackage || "";
     previousOverflow = document.documentElement.style.overflow;
     document.documentElement.style.overflow = "hidden";
     window.lenis?.stop?.();
@@ -159,8 +161,9 @@
 
   const updateLegacyControl = (control, value) => {
     if (!control) return;
-    const prototype = control instanceof HTMLSelectElement ? HTMLSelectElement.prototype :
-      control instanceof HTMLTextAreaElement ? HTMLTextAreaElement.prototype : HTMLInputElement.prototype;
+    const view = control.ownerDocument.defaultView;
+    const prototype = control.tagName === "SELECT" ? view.HTMLSelectElement.prototype :
+      control.tagName === "TEXTAREA" ? view.HTMLTextAreaElement.prototype : view.HTMLInputElement.prototype;
     Object.getOwnPropertyDescriptor(prototype, "value").set.call(control, value);
     control.dispatchEvent(new Event("input", { bubbles: true }));
     control.dispatchEvent(new Event("change", { bubbles: true }));
@@ -186,6 +189,7 @@
       Other: "Industrial Facility",
     };
     const details = [
+      `Selected solar package: ${form.dataset.selectedPackage || "Not specified"}`,
       `Property address or area: ${values.get("Address")}`,
       `Property type: ${values.get("Location")}`,
       `Average monthly electricity bill: ${values.get("Electricity Bill") || "Not provided"}`,
